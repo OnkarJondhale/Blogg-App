@@ -31,7 +31,8 @@ export default {
             opacity: "1", 
             transform: "translateX(0)", 
           },
-          "fade-down" : {
+        },
+        "fade-down" : {
             "0%": {
               opacity : "0",
               transform : "translateY(100%)"
@@ -40,8 +41,7 @@ export default {
             opacity: "1", 
             transform: "translateX(0)", 
           },
-          }
-        }, 
+          } 
       },
     },
   },

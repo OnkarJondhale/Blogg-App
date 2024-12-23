@@ -98,6 +98,7 @@ function App() {
     const [session,setsession] = useState(false);
     const [login,setLogin] = useState(true);
     const [active,setActive] = useState(false);
+    const [isLoggedIn,setIsLoggedIn] = useState(false);
 
     function updateColorSchema()
     {
@@ -124,18 +125,23 @@ function App() {
         setsession(!session);
     }
 
+    function updateIsLoggedIn()
+    {
+        setIsLoggedIn(!isLoggedIn);
+    }
+
     return (
         <>
             <div className={`min-h-screen w-full sm:p-2 flex ${bg_color[count]}`}>
-                <SideBar text={pallete_text[count]} updateColorSchema={updateColorSchema} count={count} border={border[count]} div_bg={div_bg[count]} div_text={div_text[count]} active={active} />
+                <SideBar text={pallete_text[count]} updateColorSchema={updateColorSchema} count={count} border={border[count]} div_bg={div_bg[count]} div_text={div_text[count]} active={active} isLoggedIn={isLoggedIn} />
                 <Hero border={border[count]} div_bg={div_bg[count]} div_text={div_text[count]} bg_color={bg_color[count]} active={active} text={pallete_text[count]} updateColorSchema={updateColorSchema} count={count} />
                 {
                     (active==true ?
-                    login==true ? <Login updateLogin={updateLogin} updateActive={updateActive} updateSession={updateSession} /> : <Signup updateLogin={updateLogin} updateActive={updateActive} updateSession={updateSession} />
+                    login==true ? <Login updateLogin={updateLogin} updateActive={updateActive} updateIsLoggedIn={updateIsLoggedIn} updateSession={updateSession} /> : <Signup updateLogin={updateLogin} updateActive={updateActive} updateSession={updateSession} />
                     : null)
                 }
                 {
-                    (session==false ? <DoLogin updateActive={updateActive} updateLogin={updateLogin} active={active} updateSession={updateSession} /> : null)
+                    (session==false ? <DoLogin updateActive={updateActive} updateLogin={updateLogin} updateIsLoggedIn={updateIsLoggedIn} active={active} updateSession={updateSession} /> : null)
                 }
             </div>
         </>
