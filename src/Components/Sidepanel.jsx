@@ -28,12 +28,15 @@ function Sidepanel(props)
                 </p>
             </div>
 
-            <div className="flex justify-around items-center text-[0.8rem] w-full">
-                <p> About </p>
-                <p> Apps </p>
-                <p> Legal </p>
-                <p> Privacy </p>
-                <p> Help </p>
+            <div className="flex flex-col gap-4 w-full">
+                <button className={`outline-none border-none font-bold ${props.div_bg} text-white rounded-xl px-2 py-1`}> Create a Blog </button>
+                <div className="flex justify-around items-center text-[0.8rem]">
+                    <p> About </p>
+                    <p> Apps </p>
+                    <p> Legal </p>
+                    <p> Privacy </p>
+                    <p> Help </p>
+                </div>
             </div>
         </div>
     </>

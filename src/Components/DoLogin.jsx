@@ -1,5 +1,3 @@
-import { IoMdClose } from "react-icons/io";
-
 function DoLogin(props)
 {
     function signupclickhandler()

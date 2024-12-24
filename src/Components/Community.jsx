@@ -1,5 +1,3 @@
-import "./Scroll.css"
-
 import { IoSearchSharp } from "react-icons/io5";
 import { MdMenu } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
@@ -31,7 +29,7 @@ function Community(props)
                     }
                 </div>
 
-                <div className="min-h-screen w-full p-2 flex flex-wrap justify-center gap-4 overflow-y-scroll hide-scrollbar">
+                <div className="min-h-screen w-full p-2 flex flex-wrap justify-center gap-4">
 
                 <div className="min-h-96 w-full sm:h-[30rem] sm:w-[33rem]   rounded-xl flex flex-wrap justify-center items-center gap-2 ">
                     <div className="min-h-60 w-full sm:h-[49%] sm:w-[49%] rounded-xl shadow-xl shadow-zinc-800 flex flex-col justify-between items-center">

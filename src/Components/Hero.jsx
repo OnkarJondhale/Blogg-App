@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
+import "./Scroll.css"
 import Sidepanel from "./Sidepanel";
 import Searchbar from './Searchbar';
 import Community from "./Community.jsx";
@@ -31,7 +32,7 @@ function Hero(props)
     
     return(
         <>
-        <div className={`w-full flex flex-col min-h-screen lg:w-10/12  ${props.active ? 'blur-sm' : 'blur-none'}`}>
+        <div className={`w-full flex flex-col h-screen lg:w-10/12  ${props.active ? 'blur-sm' : 'blur-none'} overflow-y-scroll hide-scrollbar`}>
             {
                 (panel ? <Sidepanel menu={menu} close={close} menuclickhandler={menuclickhandler} searchclickhandler={searchclickhandler} div_text={props.div_text} div_bg={props.div_bg} count={props.count} text={props.text} updateColorSchema={props.updateColorSchema} color={props.bg_color} panel={panel} /> : null)
             }
