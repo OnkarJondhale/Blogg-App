@@ -1,7 +1,9 @@
 import { useState } from 'react';
 
 import { NavLink } from "react-router-dom";
-import { Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom';
+
+import TextEditor from "./TextEditor.jsx"
 
 import { IoSearchSharp } from "react-icons/io5";
 import { MdMenu } from "react-icons/md";
@@ -14,10 +16,16 @@ import { FaHeart } from "react-icons/fa";
 function Explore(props)
 {
     const [close,setClose] = useState(true);
+    const [flag,setFlag] = useState(false);
 
-    function closeclickhandler()
+    function bloghandler()
     {
-        setClose(false);
+        setFlag(!flag);
+    }
+
+    function getBlog(value)
+    {
+        props.getBlog(value);
     }
 
     return(
@@ -45,17 +53,17 @@ function Explore(props)
             close ? 
                 <div className="w-full flex flex-col justify-center items-center">
                     <div className="relative min-h-20 w-full sm:w-2/3 flex flex-col items-center gap-2 p-4 mt-2 mb-2 rounded-xl shadow-xl shadow-zinc-800">
-                        <IoMdClose className="absolute top-0 right-0 mt-2 mr-2 cursor-pointer hover:bg-pink-600 rounded-full" onClick={closeclickhandler} />
                         <p className="text-center text-sm content-center py-2 sm:text-md">
                             Blogs are here! 👀 Blogs are a new way to create public or private spaces for hanging out with friends or discussing your interests. Start writing the blogs to share your thoughts, opinions, and much more.
                         </p>
-                        <button className={`outline-none border-none font-bold ${props.div_bg} text-white rounded-xl px-2 py-1`}> 
+                        <button className={`outline-none border-none font-bold ${props.div_bg} text-white rounded-xl px-2 py-1`} onClick={bloghandler}> 
                             Create a Blog 
                         </button>
                     </div>
                 </div> : null
            }
 
+        <TextEditor getBlog={getBlog} flag={flag} bloghandler={bloghandler} />
             
             <div className="h-screenw-full flex justify-center mt-2">
                 <Outlet />

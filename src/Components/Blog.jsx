@@ -1,8 +1,9 @@
-function Blog()
+function Blog(props)
 {
     return(
     <>
-        <div className="min-h-[20rem] w-full border-2 rounded-xl shadow-xl shadow-zinc-800">
+        <div>
+            <div dangerouslySetInnerHTML={{ __html: props.blog }} className="min-h-[20rem] w-full rounded-xl shadow-xl shadow-zinc-800"/>
         </div>
     </>);
 }
