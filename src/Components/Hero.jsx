@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
+
 import { Routes, Route } from 'react-router-dom';
 
 import "./Scroll.css"
@@ -10,6 +12,10 @@ import Trending from "./Trending.jsx";
 import Favourites from "./Favourites.jsx";
 import Yourblogs from "./Yourblogs.jsx";
 
+import {getCurrentUser} from "../../firebase/getCurrentUser.js";
+import {addBlog} from "../../firebase/addBlog.js";
+import { getAllBlogs } from '../../firebase/getBlog.js';
+
 function Hero(props)
 {
 
@@ -19,6 +25,24 @@ function Hero(props)
     const [close,setClose] = useState(false);
     const [blog,setBlog] = useState(null);
     const [flag,setFlag] = useState(false);
+    const [currUser,setCurrUser] = useState(null);
+    
+
+    useEffect(()=>{
+          const user = getCurrentUser();
+          setCurrUser(user);
+        },[props.session]);
+
+        useEffect(() => 
+            { 
+                const fetchBlogs = async () => 
+                    { 
+                        const newData = await getAllBlogs(); 
+                        setBlog(newData); 
+                    }; 
+            fetchBlogs(); 
+            }, [flag]);
+        
 
     function menuclickhandler()
     {
@@ -32,21 +56,18 @@ function Hero(props)
         setSearch(!search);
     }
     
-    function getBlog(value)
+    function getBlog(value,tag)
     {
         setBlog(value);
-    }
-
-    function updateBlog(value)
-    {
-        setFlag(flag);
+        addBlog(currUser.id,tag,value);
+        setFlag(!flag);
     }
 
     return(
         <>
         <div className={`w-full flex flex-col h-screen lg:w-10/12  ${props.active ? 'blur-sm' : 'blur-none'} overflow-y-scroll hide-scrollbar`}>
             {
-                (panel ? <Sidepanel menu={menu} close={close} menuclickhandler={menuclickhandler} searchclickhandler={searchclickhandler} div_text={props.div_text} div_bg={props.div_bg} count={props.count} text={props.text} updateColorSchema={props.updateColorSchema} color={props.bg_color} panel={panel} updateBlog={updateBlog} /> : null)
+                (panel ? <Sidepanel menu={menu} close={close} menuclickhandler={menuclickhandler} searchclickhandler={searchclickhandler} div_text={props.div_text} div_bg={props.div_bg} count={props.count} text={props.text} updateColorSchema={props.updateColorSchema} color={props.bg_color} panel={panel} /> : null)
             }
             {
                 (search ? <Searchbar menu={menu} close={close} menuclickhandler={menuclickhandler} searchclickhandler={searchclickhandler} div_text={props.div_text} div_bg={props.div_bg} count={props.count} text={props.text} updateColorSchema={props.updateColorSchema} color={props.bg_color} panel={panel} /> : null )
@@ -54,11 +75,11 @@ function Hero(props)
             
             <Routes>
                 <Route path="/" element={<Community menu={menu} close={close} menuclickhandler={menuclickhandler} searchclickhandler={searchclickhandler} div_text={props.div_text} div_bg={props.div_bg}/>} />
-                <Route path="/community" element={<Community menu={menu} close={close} menuclickhandler={menuclickhandler} searchclickhandler={searchclickhandler} div_text={props.div_text} div_bg={props.div_bg} />} /> 
-                <Route path="/explore" element={<Explore menu={menu} close={close} menuclickhandler={menuclickhandler} searchclickhandler={searchclickhandler} div_text={props.div_text} div_bg={props.div_bg} getBlog={getBlog} editor={flag} />} > 
-                    <Route path="/explore/trending" element={<Trending blog={blog} />} /> 
-                    <Route path="/explore/favourites" element={<Favourites />} /> 
-                    <Route path="/explore/yourblogs" element={<Yourblogs />} /> 
+                <Route path="/community" element={<Community menu={menu} close={close} menuclickhandler={menuclickhandler} searchclickhandler={searchclickhandler} div_text={props.div_text} div_bg={props.div_bg} session={props.session} />} /> 
+                <Route path="/explore" element={<Explore menu={menu} close={close} menuclickhandler={menuclickhandler} searchclickhandler={searchclickhandler} div_text={props.div_text} div_bg={props.div_bg} getBlog={getBlog} editor={flag} session={props.session} />} > 
+                    <Route path="/explore/trending" element={<Trending blog={blog}  border={props.border} session={props.session} currUser={currUser} />} /> 
+                    <Route path="/explore/favourites" element={<Favourites border={props.border} session={props.session} currUser={currUser} />}  /> 
+                    <Route path="/explore/yourblogs" element={<Yourblogs border={props.border}  session={props.session} currUser={currUser}/>}  /> 
                 </Route>
             </Routes>
 

@@ -7,6 +7,8 @@ import { GrLinkNext } from "react-icons/gr";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 
+import { createUser } from '../../firebase/auth';
+
 function Login(props)
 {
     const [takeDetail,setTakeDetail] = useState(false);
@@ -44,11 +46,12 @@ function Login(props)
         setUsername(e.target.value);
     }
 
-    async function signuphandler()
+    function signuphandler()
     {
-        console.log(email,password,username);
-        const response = await signUpUser(email,password,username,2);
-        console.log("response is :",response)
+        createUser(email,password,username,2);
+        props.updateSession();
+        props.updateActive();
+        props.updateIsLoggedIn();
     }
 
     return(

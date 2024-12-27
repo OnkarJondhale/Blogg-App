@@ -10,6 +10,13 @@ function SideBar(props) {
     {
         props.updateColorSchema();
     }
+
+    function logouthandler()
+    {
+        console.log("logout successful");
+        props.updateSession();
+        props.updateIsLoggedIn();
+    }
     
     return (
         <>
@@ -27,8 +34,7 @@ function SideBar(props) {
                             `${props.text} (${props.count + 1}/12)`
                         } 
                     </button>
-                    <NavLink to="/activity"> <p className={`flex gap-1 items-center cursor-pointer hover:underline ${props.isLoggedIn ? 'block' : 'hidden'}`}> <RiUserCommunityFill /> Activities </p> </NavLink> 
-                    <NavLink to="/account"> <p className={`flex gap-1 items-center cursor-pointer hover:underline ${props.isLoggedIn ? 'block' : 'hidden'}`} > <RiUserCommunityFill /> Account </p> </NavLink> 
+                    <p className={`flex gap-1 items-center cursor-pointer hover:underline ${props.isLoggedIn ? 'block' : 'hidden'}`} onClick={logouthandler}> <RiUserCommunityFill /> Logout </p> 
                     </div>
                </div>
                 

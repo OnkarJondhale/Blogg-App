@@ -4,6 +4,15 @@ import { IoMdClose } from "react-icons/io";
 
 function Community(props)
 {
+    function communityhandler()
+    {
+        if(props.session==false)
+        {
+            alert("Do login to continue");
+            return;
+        }
+    }
+
     return(
     <>
         <div className="flex flex-col gap-2">
@@ -33,7 +42,7 @@ function Community(props)
 
                 <div className="min-h-96 w-full sm:h-[30rem] sm:w-[33rem]   rounded-xl flex flex-wrap justify-center items-center gap-2 ">
                     <div className="min-h-60 w-full sm:h-[49%] sm:w-[49%] rounded-xl shadow-xl shadow-zinc-800 flex flex-col justify-between items-center">
-                        <img src="aesthetic.avif" className="cursor-pointer h-full rounded-t-xl"/>
+                        <img src="aesthetic.avif" className="cursor-pointer h-full rounded-t-xl" onClick={communityhandler}/>
                         <p className="px-2 font-mono">Aesthetics</p>
                     </div>
                     <div className="min-h-60 w-full sm:h-[49%] sm:w-[49%] rounded-xl shadow-xl shadow-zinc-800 flex flex-col justify-between items-center">

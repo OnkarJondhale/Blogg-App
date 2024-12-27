@@ -43,7 +43,7 @@ const bg_color = {
 };
 
 const border = {
-    0 : 'border-blue-800',
+    0 : 'border-white',
     1 : 'border-black',
     2 : 'border-blue-700',
     3 : 'border-green-700',
@@ -133,11 +133,11 @@ function App() {
     return (
         <>
             <div className={`min-h-screen w-full sm:p-2 flex ${bg_color[count]}`}>
-                <SideBar text={pallete_text[count]} updateColorSchema={updateColorSchema} count={count} border={border[count]} div_bg={div_bg[count]} div_text={div_text[count]} active={active} isLoggedIn={isLoggedIn} />
-                <Hero border={border[count]} div_bg={div_bg[count]} div_text={div_text[count]} bg_color={bg_color[count]} active={active} text={pallete_text[count]} updateColorSchema={updateColorSchema} count={count} />
+                <SideBar text={pallete_text[count]} updateColorSchema={updateColorSchema} count={count} border={border[count]} div_bg={div_bg[count]} div_text={div_text[count]} active={active} isLoggedIn={isLoggedIn} session={session} updateSession={updateSession} updateIsLoggedIn={updateIsLoggedIn} />
+                <Hero border={border[count]} div_bg={div_bg[count]} div_text={div_text[count]} bg_color={bg_color[count]} active={active} text={pallete_text[count]} updateColorSchema={updateColorSchema} count={count} session={session} />
                 {
                     (active==true ?
-                    login==true ? <Login updateLogin={updateLogin} updateActive={updateActive} updateIsLoggedIn={updateIsLoggedIn} updateSession={updateSession} /> : <Signup updateLogin={updateLogin} updateActive={updateActive} updateSession={updateSession} />
+                    login==true ? <Login updateLogin={updateLogin} updateActive={updateActive} updateIsLoggedIn={updateIsLoggedIn} updateSession={updateSession} /> : <Signup updateLogin={updateLogin} updateIsLoggedIn={updateIsLoggedIn} updateActive={updateActive} updateSession={updateSession} />
                     : null)
                 }
                 {
